@@ -5,8 +5,9 @@ import "./index.css";
 // import MemoHooks from "./06-memos/MemoHooks";
 // import MemoCounter from "./06-memos/MemoCounter";
 // import { InstagromApp } from "./07-useOptimistic/InstagromApp";
-import ClientInformation from "./08-use-suspense/ClientInformation";
-import { getUserAction } from "./08-use-suspense/api/get-user-action";
+// import ClientInformation from "./08-use-suspense/ClientInformation";
+// import { getUserAction } from "./08-use-suspense/api/get-user-action";
+import ProfessionalApp from "./09-useContext/ProfessionalApp";
 // import { ScrambleWords } from "./05-useReducer/ScrambleWords";
 // import FocusScreen from "./04-useRef/FocusScreen";
 // import { TasksApp } from "./05-useReducer/TaskApp";
@@ -33,7 +34,7 @@ createRoot(document.getElementById("root")!).render(
     {/* // el Suspense Mostrar una interfaz de usuario de respaldo (un "fallback", como un
     spinner de carga) // mientras espera que la carga de datos de sus
     componentes hijos se complete. */}
-    <Suspense
+    {/* <Suspense
       fallback={
         <div className="bg-gradient flex flex-col">
           <h1 className="text-2xl">Cargando</h1>
@@ -41,6 +42,7 @@ createRoot(document.getElementById("root")!).render(
       }
     >
       <ClientInformation getUser={getUserAction(1000)} />
-    </Suspense>
+    </Suspense> */}
+    <ProfessionalApp />
   </StrictMode>
 );
