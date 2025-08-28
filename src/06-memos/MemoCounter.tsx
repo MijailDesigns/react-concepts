@@ -15,6 +15,7 @@ const heavyStuff = (iterationNumber: number) => {
 const MemoCounter = () => {
   const { count, increment } = useCounter(400);
   const { count: count2, increment: increment2 } = useCounter(10);
+  // se usa para memorizar el resultado de un calculo sotoso y evitar que se vuelva a ejecutar en cada render
   const myHeavyValue = useMemo(() => heavyStuff(count), [count]);
   return (
     <div className="bg-gradient flex flex-col gap-4">

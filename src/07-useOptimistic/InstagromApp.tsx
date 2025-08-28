@@ -10,6 +10,9 @@ interface Comment {
 let lastId = 2;
 
 export const InstagromApp = () => {
+  // El propósito de useTransition es marcar ciertas actualizaciones de estado como "no urgentes".
+  // Esto permite que React mantenga la interfaz de usuario interactiva y sin bloqueos mientras
+  // se procesan cambios de estado que podrían ser lentos o pesados, además de proporcionar un estado isPending para mostrar indicadores de carga.
   const [isPending, startTransition] = useTransition();
 
   const [comments, setComments] = useState<Comment[]>([
