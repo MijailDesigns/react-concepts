@@ -15,6 +15,7 @@ type AutStatus = "checking" | "authenticated" | "not-authenticated";
 interface UserContextProps {
   // state
   authStatus: AutStatus;
+  isAuthenticated: boolean;
   user: User | null;
 
   // methods
@@ -25,7 +26,7 @@ interface UserContextProps {
 export const UserContext = createContext({} as UserContextProps);
 
 const UserContextProvider = ({ children }: PropsWithChildren) => {
-  const [auth, setAutStatus] = useState<AutStatus>("checking");
+  const [authStatus, setAutStatus] = useState<AutStatus>("checking");
   const [user, setUser] = useState<User | null>(null);
 
   const handleLogin = (userId: number) => {
@@ -63,7 +64,8 @@ const UserContextProvider = ({ children }: PropsWithChildren) => {
   return (
     <UserContext
       value={{
-        authStatus: auth,
+        authStatus: authStatus,
+        isAuthenticated: authStatus === "authenticated",
         user: user,
         login: handleLogin,
         logout: handleLogout,
