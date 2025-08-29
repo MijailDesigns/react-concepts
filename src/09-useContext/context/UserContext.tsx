@@ -1,5 +1,10 @@
-import { createContext, useState, type PropsWithChildren } from "react";
-import type { User } from "../data/usermock.data";
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
+import { users, type User } from "../data/usermock.data";
 
 // interface UserContextProps {
 //     children: React.ReactNode;
@@ -24,13 +29,36 @@ const UserContextProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);
 
   const handleLogin = (userId: number) => {
-    console.log({ userId });
+    const user = users.find((user) => user.id === userId);
+    if (!user) {
+      console.log(`User not found ${userId}`);
+      setUser(null);
+      setAutStatus("not-authenticated");
+      return false;
+    }
+
+    setUser(user);
+    setAutStatus("authenticated");
+    localStorage.setItem("userId", userId.toString());
     return true;
   };
 
   const handleLogout = () => {
     console.log("logout");
+    setAutStatus("not-authenticated");
+    setUser(null);
+    localStorage.removeItem("userId");
   };
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      handleLogin(+storedUserId);
+      return;
+    }
+
+    handleLogout();
+  }, []);
 
   return (
     <UserContext
